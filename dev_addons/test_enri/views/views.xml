@@ -1,0 +1,96 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="test_enri.list">
+      <field name="name">test_enri list</field>
+      <field name="model">test_enri.test_enri</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+          <field name="description"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <!-- Probemos un form -->
+    <record model="ir.ui.view" id="test_enri.form">
+      <field name="name">test_enri Form</field>
+      <field name="model">test_enri.test_enri</field> <!-- Es el mismo modelo que en models.py -->
+      <field name="arch" type="xml">
+        <form string="Test">
+            <sheet>
+                <group>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <group>
+                        <field name="value"/>
+                        <field name="value2"/>
+                    </group>
+                </group>
+                <notebook>
+                    <page string="Description">
+                        <field name="description"/>
+                    </page>
+                </notebook>
+            </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="test_enri.action_window">
+      <field name="name">test_enri window</field>
+      <field name="res_model">test_enri.test_enri</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="test_enri.action_server">
+      <field name="name">test_enri server</field>
+      <field name="model_id" ref="model_test_enri_test_enri"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+
+    <!-- <menuitem name="test_enri" id="test_enri.menu_root"/> -->
+
+
+    <menuitem id="test_menu_root" name="Modulo Test Enri"> 
+      <menuitem id="test_first_level_menu" name="First Level">
+          <menuitem id="test_model_menu_action" action="test_enri.action_window"/> <!-- Referencia a la accion de mas arriba  -->
+      </menuitem>
+    </menuitem>
+
+
+
+    <!-- menu categories -->
+<!--
+    <menuitem name="Menu 1" id="test_enri.menu_1" parent="test_enri.menu_root"/>
+    <menuitem name="Menu 2" id="test_enri.menu_2" parent="test_enri.menu_root"/>
+-->
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="test_enri.menu_1_list" parent="test_enri.menu_1"
+              action="test_enri.action_window"/>
+    <menuitem name="Server to list" id="test_enri" parent="test_enri.menu_2"
+              action="test_enri.action_server"/>
+-->
+  </data>
+</odoo>
